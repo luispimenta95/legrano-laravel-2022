@@ -10,13 +10,13 @@ class CidadesController extends Controller
     public function index(Request $request)
 
     {
-        $pesquisa = $request->query('q');
+        $pesquisa = $request->query('pesquisa');
         if ($pesquisa) {
             $cidades = Cidade::where('nome', 'LIKE', '%' . $pesquisa . '%')->paginate()->withQueryString();
         } else {
 
             $cidades = Cidade::paginate(10);
         }
-        return view('cidades.lista', ['cidades' => $cidades]);
+        return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa]);
     }
 }

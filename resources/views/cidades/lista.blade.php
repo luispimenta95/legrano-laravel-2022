@@ -31,7 +31,7 @@
         <div class="float-right">
             <form method=" get" action="#">
                 <div class="input-group mb-3 mt-2">
-                    <input type='text' class='form-form-control' placeholder="Digite o termo a ser pesquisado" name='q' />
+                    <input type='text' class='form-form-control' placeholder="Digite o termo a ser pesquisado" name='pesquisa' value="{{$pesquisa}}" />
                     <div class='input-group-append'>
                         <button class="btn btn-primary" type='submit'>
                             Pesquisar
@@ -65,13 +65,22 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="float-left">
+                <button class="btn btn-success" type='submit'>
+                    Adicionar
+                </button>
+            </div>
             <div class="float-right">
                 {!! $cidades->links()!!}
             </div>
         </div>
     </div>
     <div class="container">
-        &copy; 2016 - Web Dev Academy
+        <?php
+        $ano = date('Y');
+        $futuro = date('Y', strtotime('+5 years', strtotime('now')));
+        ?>
+        &copy; Luis Felipe A.Pimenta <?php echo ($ano . ' - ' . $futuro) ?>
     </div>
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

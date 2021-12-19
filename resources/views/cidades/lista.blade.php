@@ -43,6 +43,13 @@
             </form>
         </div>
         <div class="table-responsive">
+            <?php
+            if (isset($mensagem)) {
+                echo $mensagem;
+                unset($mensagem);
+            }
+            ?>
+
             <table class="table table-dark">
                 <thead>
                     <tr>

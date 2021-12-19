@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cidade;
+use App\Util\MensagemPadrao;
 
 class CidadesController extends Controller
 {
     public function index(Request $request)
-
     {
+        $msg = MensagemPadrao::retornaMensagens();
+
         $pesquisa = $request->query('pesquisa');
         if ($pesquisa) {
             $cidades = Cidade::where('nome', 'LIKE', '%' . $pesquisa . '%')->paginate()->withQueryString();
+
         } else {
 
             $cidades = Cidade::paginate(10);
         }
-        return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa]);
+        return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa, 'mensagem' => $msg['cadastro']]);
     }
     public function editar($id)
     {

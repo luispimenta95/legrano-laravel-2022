@@ -10,17 +10,21 @@ class CidadesController extends Controller
 {
     public function index(Request $request)
     {
-        $msg = MensagemPadrao::retornaMensagens();
+        $mensagem = MensagemPadrao::retornaMensagens();
 
         $pesquisa = $request->query('pesquisa');
         if ($pesquisa) {
             $cidades = Cidade::where('nome', 'LIKE', '%' . $pesquisa . '%')->paginate()->withQueryString();
-
+            $total = $cidades->count();
+            if ($total == 0) {
+                $cidades = Cidade::paginate(10);
+                return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa, 'mensagem' => $mensagem['semRegistro']]);
+            }
         } else {
 
             $cidades = Cidade::paginate(10);
         }
-        return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa, 'mensagem' => $msg['cadastro']]);
+        return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa]);
     }
     public function editar($id)
     {

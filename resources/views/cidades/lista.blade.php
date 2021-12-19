@@ -36,7 +36,7 @@
                         <button class="btn btn-primary" type='submit'>
                             Pesquisar
                         </button>
-                        <a href="#" class="btn btn-danger"> Limpar</a>
+                        <a href="/cidades" class="btn btn-danger"> Limpar</a>
 
                     </div>
                 </div>

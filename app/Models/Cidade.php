@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Cidade extends Model
 {
     use HasFactory;
-    protected $filable = ['nome', 'precoFrete'];
+    protected $filable = ['nome', 'precoFrete', 'entrega'];
 }

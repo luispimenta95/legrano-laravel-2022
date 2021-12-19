@@ -49,6 +49,7 @@
                         <th scope="col">Código do registro</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Preço do frete</th>
+                        <th scope="col">Disponível para entrega</th>
                         <th scope="col">Ações</th>
 
                     </tr>
@@ -59,7 +60,12 @@
                         <td>{{$cidade->id}}</td>
                         <td>{{$cidade->nome}}</td>
                         <td>{{ 'R$ '.number_format($cidade->precoFrete, 2, ',', '.') }} </td>
-                        <td>Editar/Excluir </td>
+                        <td>{{ $cidade->entrega==0 ? 'Não' : 'Sim' }}</td>
+                        <td>
+                            <a href="/cidades/editar/{{$cidade->id}}">
+                                Editar
+                            </a>
+                        </td>
 
                     </tr>
                     @endforeach

@@ -20,6 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/planos', [TipoClienteController::class, 'index']);
-Route::get('/cidades', [CidadesController::class, 'index']);
-Route::get('/cidades/editar/{id}', [CidadesController::class, 'editar']);
-Route::post('/cidades/atualizar/{id}', [CidadesController::class, 'update']);
+Route::post('/cidades', [CidadesController::class, 'index']);
+Route::post('/cidades/editar/', [CidadesController::class, 'editar']);

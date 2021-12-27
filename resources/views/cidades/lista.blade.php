@@ -24,8 +24,10 @@
                 unset($mensagem);
             }
             ?>
-            <form class="col-md-4 float-right" action="#" method="get">
+            <form class="col-md-4 float-right" action="/cidades" method="POST">
+            @csrf
                 <input class="form-group" type="text" placeholder="Termo a ser pesquisado" name='pesquisa' value="{{$pesquisa}}">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button class="btn btn-outline-success" type="submit">Pesquisar</button>
                 <a class="btn btn-outline-success" href="/cidades">Limpar</a>
             </form>
@@ -48,9 +50,13 @@
                         <td>{{ 'R$ '.number_format($cidade->precoFrete, 2, ',', '.') }} </td>
                         <td>{{ $cidade->entrega==0 ? 'Não' : 'Sim' }}</td>
                         <td>
-                            <a href="/cidades/editar/{{$cidade->id}}">
-                                Editar
-                            </a>
+                        <form class="col-md-4 float-right" action="/cidades/editar" method="POST">
+            @csrf
+        
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="id" value="{{$cidade->id}}">
+                <button class="btn btn-outline-primary" type="submit">Editar</button>
+            </form>
                         </td>
 
                     </tr>

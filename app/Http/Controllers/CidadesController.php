@@ -12,7 +12,7 @@ class CidadesController extends Controller
     {
         $mensagem = MensagemPadrao::retornaMensagens();
 
-        $pesquisa = $request->query('pesquisa');
+        $pesquisa = $request->pesquisa;
         if ($pesquisa) {
             $cidades = Cidade::where('nome', 'LIKE', '%' . $pesquisa . '%')->paginate()->withQueryString();
             $total = $cidades->count();
@@ -26,20 +26,9 @@ class CidadesController extends Controller
         }
         return view('cidades.lista', ['cidades' => $cidades, 'pesquisa' => $pesquisa]);
     }
-    public function editar($id)
+    public function editar(Request $request)
     {
-        $cidade = Cidade::findOrFail($id);
+        $cidade = Cidade::findOrFail($request->id);
         return view('cidades.editar', ['cidade' => $cidade]);
-    }
-    public function update(Request $request, Cidade $cidade)
-    {
-        $cidade = Cidade::findOrFail($cidade->id);
-        if ($cidade) {
-            //redirect dengan pesan sukses
-            return redirect()->route('cidades.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        } else {
-            //redirect dengan pesan error
-            return redirect()->route('cidades.index')->with(['error' => 'Data Gagal Diupdate!']);
-        }
     }
 }

@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/planos', [TipoClienteController::class, 'index']);
-Route::post('/cidades', [CidadesController::class, 'index']);
-Route::post('/cidades/editar/', [CidadesController::class, 'editar']);
+Route::post('/planos', [TipoClienteController::class, 'index']);
+Route::post('/planos/listar', [TipoClienteController::class, 'listar']);
+Route::get('/cidades', [CidadesController::class, 'index']);
+Route::post('/cidades/listar', [CidadesController::class, 'listar']);
+Route::post('/cidades/editar/', [CidadesController::class, 'editar']); 
+Route::post('/cidades/excluir/', [CidadesController::class, 'excluir']); 

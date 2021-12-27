@@ -24,8 +24,10 @@
                 unset($mensagem);
             }
             ?>
-            <form class="col-md-4 float-right" action="#" method="get">
+            <form class="col-md-4 float-right" action="/planos/listar/" method="POST">
+            @csrf
                 <input class="form-group" type="text" placeholder="Termo a ser pesquisado" name='pesquisa' value="{{$pesquisa}}">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <button class="btn btn-outline-success" type="submit">Pesquisar</button>
                 <a class="btn btn-outline-success" href="/planos">Limpar</a>
             </form>
@@ -33,7 +35,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Código do registro</th>
-                        <th scope="col">Descrição</th>
+                        <th scope="col">Nome</th>
                         <th scope="col">Ações</th>
 
                     </tr>
@@ -44,9 +46,13 @@
                         <td>{{$plano->id}}</td>
                         <td>{{$plano->descricao}}</td>
                         <td>
-                            <a href="/planos/editar/{{$plano->id}}">
-                                Editar
-                            </a>
+                        <form class="col-md-4 float-right" action="/planos/editar" method="POST">
+            @csrf
+        
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="id" value="{{$plano->id}}">
+                <button class="btn btn-outline-primary" type="submit">Editar</button>
+            </form>
                         </td>
 
                     </tr>

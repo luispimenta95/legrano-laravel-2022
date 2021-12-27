@@ -27,4 +27,22 @@ class TipoClienteController extends Controller
         }
         return view('planos.lista', ['planos' => $planos, 'pesquisa' => $pesquisa]);
     }
+    public function listar(Request $request)
+    {
+        $mensagem = MensagemPadrao::retornaMensagens();
+
+        $pesquisa = $request->pesquisa;
+        if ($pesquisa) {
+            $planos = TipoCliente::where('descricao', 'LIKE', '%' . $pesquisa . '%')->paginate()->withQueryString();
+            $total = $planos->count();
+            if ($total == 0) {
+                $planos = TipoCliente::paginate(10);
+                return view('planos.lista', ['planos' => $planos, 'pesquisa' => $pesquisa, 'mensagem' => $mensagem['semRegistro']]);
+            }
+        } else {
+
+            $planos = TipoCliente::paginate(10);
+        }
+        return view('planos.lista', ['planos' => $planos, 'pesquisa' => $pesquisa]);
+    }
 }

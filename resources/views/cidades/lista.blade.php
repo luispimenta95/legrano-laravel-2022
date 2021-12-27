@@ -19,12 +19,13 @@
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
         <div class="col-md-12 p-lg-12 mx-auto my-12">
             <?php
+            dd($mensagem);
             if (isset($mensagem)) {
                 echo $mensagem;
                 unset($mensagem);
             }
             ?>
-            <form class="col-md-4 float-right" action="/cidades" method="POST">
+            <form class="col-md-4 float-right" action="/cidades/listar/" method="POST">
             @csrf
                 <input class="form-group" type="text" placeholder="Termo a ser pesquisado" name='pesquisa' value="{{$pesquisa}}">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -50,6 +51,13 @@
                         <td>{{ 'R$ '.number_format($cidade->precoFrete, 2, ',', '.') }} </td>
                         <td>{{ $cidade->entrega==0 ? 'Não' : 'Sim' }}</td>
                         <td>
+                        <form class="col-md-4 float-right" action="/cidades/excluir" method="POST">
+            @csrf
+        
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="id" value="{{$cidade->id}}">
+                <button class="btn btn-outline-danger" type="submit">Excluir</button>
+            </form>
                         <form class="col-md-4 float-right" action="/cidades/editar" method="POST">
             @csrf
         
@@ -57,17 +65,13 @@
                 <input type="hidden" name="id" value="{{$cidade->id}}">
                 <button class="btn btn-outline-primary" type="submit">Editar</button>
             </form>
+           
                         </td>
 
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="float-left">
-                <button class="btn btn-success" type='submit'>
-                    Adicionar
-                </button>
-            </div>
             <div class="float-right">
                 {!! $cidades->links()!!}
             </div>

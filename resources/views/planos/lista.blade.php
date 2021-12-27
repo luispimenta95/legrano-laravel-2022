@@ -13,41 +13,27 @@
 </head>
 
 <body>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
 
-                    </div>
-            </div>
-        </div>
+    @include('partial.header')
 
-            <tbody>
-
-            </tbody>
-        </table>
-
-    </div> -->
-    <div class="container">
-        <div class="float-right">
-            <form method=" get" action="#">
-                <div class="input-group mb-3 mt-2">
-                    <input type='text' class='form-form-control' placeholder="Digite o termo a ser pesquisado" name='pesquisa' />
-                    <div class='input-group-append'>
-                        <button class="btn btn-primary" type='submit'>
-                            Pesquisar
-                        </button>
-                        <a href="#" class="btn btn-danger"> Limpar</a>
-
-                    </div>
-                </div>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-12 p-lg-12 mx-auto my-12">
+            <?php
+            if (isset($mensagem)) {
+                echo $mensagem;
+                unset($mensagem);
+            }
+            ?>
+            <form class="col-md-4 float-right" action="#" method="get">
+                <input class="form-group" type="text" placeholder="Termo a ser pesquisado" name='pesquisa' value="{{$pesquisa}}">
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                <a class="btn btn-outline-success" href="/planos">Limpar</a>
             </form>
-        </div>
-        <div class="table-responsive">
             <table class="table table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Código do registro</th>
-                        <th scope="col">Nome</th>
+                        <th scope="col">Descrição</th>
                         <th scope="col">Ações</th>
 
                     </tr>
@@ -57,7 +43,11 @@
                     <tr>
                         <td>{{$plano->id}}</td>
                         <td>{{$plano->descricao}}</td>
-                        <td>Editar/Excluir </td>
+                        <td>
+                            <a href="/planos/editar/{{$plano->id}}">
+                                Editar
+                            </a>
+                        </td>
 
                     </tr>
                     @endforeach
@@ -72,19 +62,7 @@
                 {!! $planos->links()!!}
             </div>
         </div>
-    </div>
-    <div class="container">
-        <?php
-        $ano = date('Y');
-        $futuro = date('Y', strtotime('+5 years', strtotime('now')));
-        ?>
-        &copy; Luis Felipe A.Pimenta <?php echo ($ano . ' - ' . $futuro) ?>
-    </div>
-    <!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
